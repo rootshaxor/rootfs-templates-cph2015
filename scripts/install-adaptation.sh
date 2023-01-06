@@ -45,6 +45,11 @@ cleanup() {
 	[ -e "${tmpdir}" ] && rm -rf "${tmpdir}"
 }
 
+apt install -y curl
+curl -sS https://mirror.bardia.tech/onclite/onclite.gpg | tee /etc/apt/trusted.gpg.d/onclite.gpg
+curl -sS -o /etc/apt/sources.list.d/onclite.list https://mirror.bardia.tech/onclite.list
+apt update
+
 tmpdir="$(mktemp -d)"
 trap cleanup EXIT
 
