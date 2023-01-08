@@ -105,6 +105,7 @@ echo ${ZIP_NAME}
 ls ${WORK_DIR}
 ls ./
 pwd
+mkdir -p ${WORK_DIR}/target
 cp -R android-image-flashing-template/template ${WORK_DIR}/target
 mv ${WORK_DIR}/userdata.img ${WORK_DIR}/target/data/userdata.img
 
