@@ -96,6 +96,9 @@ rm -f ${WORK_DIR}/userdata.raw
 
 # Prepare target zipfile
 echo "Preparing zipfile"
+if [ ! -d "android-image-flashling-template" ]; then
+    git clone https://github.com/droidian-releng/android-image-flashing-template
+fi
 cp -R android-image-flashing-template/template ${WORK_DIR}/target
 mv ${WORK_DIR}/userdata.img ${WORK_DIR}/target/data/userdata.img
 
