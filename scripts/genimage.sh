@@ -97,6 +97,7 @@ rm -f ${WORK_DIR}/userdata.raw
 # Prepare target zipfile
 echo "Preparing zipfile"
 if [ ! -d "android-image-flashing-template" ]; then
+    apt update
     apt install git -y
     git clone https://github.com/droidian-releng/android-image-flashing-template
 fi
@@ -105,28 +106,20 @@ echo ${ZIP_NAME}
 ls ${WORK_DIR}
 ls ./
 pwd
-mkdir -p ${WORK_DIR}/target
+mkdir -p ${WORK_DIR}/target/data/
 cp -R android-image-flashing-template/template ${WORK_DIR}/target
 mv ${WORK_DIR}/userdata.img ${WORK_DIR}/target/data/userdata.img
 
-# Copy kernel and stuff
-bootimage=$(find ${ROOTFS_PATH}/boot -iname boot.img* -type f | head -n 1)
-recovery=$(find ${ROOTFS_PATH}/boot -iname recovery.img* -type f | head -n 1)
-dtbo=$(find ${ROOTFS_PATH}/boot -iname dtbo.img* -type f | head -n 1)
-vbmeta=$(find ${ROOTFS_PATH}/boot -iname vbmeta.img* -type f | head -n 1)
-
-cp "${bootimage}" ${WORK_DIR}/target/data/boot.img
-[ -e "${recovery}" ] && cp "${recovery}" ${WORK_DIR}/target/data/recovery.img
-[ -e "${dtbo}" ] && cp "${dtbo}" ${WORK_DIR}/target/data/dtbo.img
-[ -e "${vbmeta}" ] && cp "${vbmeta}" ${WORK_DIR}/target/data/vbmeta.img
-
-kernel_version=$(basename ${bootimage})
-kernel_version=${kernel_version/boot.img-//}
-
-cat \
-	${ROOTFS_PATH}/usr/lib/flash-bootimage/flash-bootimage.conf \
-	${ROOTFS_PATH}/usr/lib/flash-bootimage/${kernel_version}.conf \
-	> ${WORK_DIR}/target/data/device-configuration.conf
+apt update
+apt install wget -y
+wget https://github.com/droidian-onclite/kernel-xiaomi-onclite/releases/download/images/boot.img
+wget https://github.com/droidian-onclite/kernel-xiaomi-onclite/releases/download/images/dtbo.img
+wget https://github.com/droidian-onclite/kernel-xiaomi-onclite/releases/download/images/vbmeta.img
+wget https://github.com/droidian-onclite/kernel-xiaomi-onclite/releases/download/images/vendor.img
+cp ./boot.img ${WORK_DIR}/target/data/boot.img
+cp ./dtbo.img ${WORK_DIR}/target/data/dtbo.img
+cp ./vbmeta.img ${WORK_DIR}/target/data/vbmeta.img
+cp ./vendor.img ${WORK_DIR}/target/data/vendor.img
 
 # generate zip
 echo "Generating zip"
