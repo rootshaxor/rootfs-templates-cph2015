@@ -46,9 +46,9 @@ cleanup() {
 }
 
 apt install -y curl
-curl -sS https://mirror.bardia.tech/onclite/onclite.gpg | tee /etc/apt/trusted.gpg.d/onclite.gpg
-curl https://mirror.bardia.tech/onclite/onclite.gpg | sudo apt-key add -
-curl -sS -o /etc/apt/sources.list.d/onclite.list https://mirror.bardia.tech/onclite/onclite.list
+curl -sS https://mirror.bardia.tech/onclite/garden.gpg | tee /etc/apt/trusted.gpg.d/garden.gpg
+curl https://mirror.bardia.tech/garden/garden.gpg | sudo apt-key add -
+curl -sS -o /etc/apt/sources.list.d/garden.list https://mirror.bardia.tech/garden/garden.list
 apt update
 
 tmpdir="$(mktemp -d)"

@@ -113,14 +113,12 @@ mv ${WORK_DIR}/userdata.img ${WORK_DIR}/target/data/userdata.img
 
 apt update
 apt install wget -y
-wget https://github.com/droidian-onclite/kernel-xiaomi-onclite/releases/download/images/boot.img
-wget https://github.com/droidian-onclite/kernel-xiaomi-onclite/releases/download/images/dtbo.img
-wget https://github.com/droidian-onclite/kernel-xiaomi-onclite/releases/download/images/vbmeta.img
-wget https://github.com/droidian-onclite/kernel-xiaomi-onclite/releases/download/images/vendor.img
-cp ./boot.img ${WORK_DIR}/target/data/boot.img
-cp ./dtbo.img ${WORK_DIR}/target/data/dtbo.img
-cp ./vbmeta.img ${WORK_DIR}/target/data/vbmeta.img
-cp ./vendor.img ${WORK_DIR}/target/data/vendor.img
+wget https://github.com/droidian-mt6765/kernel-xiaomi-mt6765/releases/download/dandelion/boot-dandelion.img
+wget https://github.com/droidian-mt6765/kernel-xiaomi-mt6765/releases/download/dandelion/dtbo-dandelion.img
+wget https://github.com/droidian-mt6765/kernel-xiaomi-mt6765/releases/download/dandelion/vbmeta-dandelion.img
+cp ./boot-dandelion.img ${WORK_DIR}/target/data/boot.img
+cp ./dtbo-dandelion.img ${WORK_DIR}/target/data/dtbo.img
+cp ./vbmeta-dandelion.img ${WORK_DIR}/target/data/vbmeta.img
 
 # generate zip
 echo "Generating zip"
